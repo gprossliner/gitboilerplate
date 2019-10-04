@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const rif = require("replace-in-file");
 
-module.exports = async function fileprocessor(directory, options){
+module.exports = async function fileprocessor(options){
     
     let files = [];
 
@@ -37,7 +37,7 @@ module.exports = async function fileprocessor(directory, options){
         
     }
 
-    processdir(directory);
+    processdir(".");
 
     console.log("replace file contents")
     rif.sync({

@@ -2,7 +2,7 @@
 
 ## apply to existing project
 
-gbp apply <url>
+gbp apply <boilerplaterepo> [<dest=.>]
 
 ## configuration
 
@@ -18,6 +18,8 @@ exclude: |
     CONTRIBUTING.md
 
 ```
+
+## 
 
 ## notes
 

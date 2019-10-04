@@ -3,20 +3,19 @@ const fs = require("fs");
 const path = require("path");
 const rmfr = require('rmfr');
 
-module.exports = async function(src, dest) {
+module.exports = async function(src) {
 
     // Clone a given repository into the `dest` directory
     // The directory must be empty
-    console.log(`cloning ${src} to ${dest}`);
-    const repo = await git.Clone(src, dest);
+    console.log(`cloning ${src}`);
+    const repo = await git.Clone(src, ".");
     console.log("done");
     
 
     // --depth 1 is not available, so we delete the .git folder
     // return rmfr(".git");
-    const gitdir = path.join(dest, ".git");
 
-    console.log(`delete gitdir: ${gitdir}`);
-    await rmfr(gitdir);
+    console.log(`delete gitdir`);
+    await rmfr(".git");
     console.log(`done`);
 }
