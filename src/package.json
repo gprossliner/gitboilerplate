@@ -1,0 +1,15 @@
+{
+  "name": "gitboilerplate",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "installConfig": {
+    "pnp": false
+  },
+  "dependencies": {
+    "glob": "^7.1.4",
+    "nodegit": "^0.26.2",
+    "replace-in-file": "^4.1.3",
+    "rmfr": "^2.0.0"
+  }
+}
