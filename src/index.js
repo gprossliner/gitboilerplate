@@ -1,3 +1,4 @@
+"use strict"
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -6,13 +7,7 @@ const helpers = require("./helpers");
 const fetcher = require("./fetcher");
 const processor = require("./fileprocessor");
 
-// get boilerplate repo
-const src = "/tmp/GitVersion"
-
-// the local path to apply
-const dest = "/tmp/MYPROJ"
-
-async function run() {
+module.exports = async function run(args) {
 
     const pwd = process.cwd();
 

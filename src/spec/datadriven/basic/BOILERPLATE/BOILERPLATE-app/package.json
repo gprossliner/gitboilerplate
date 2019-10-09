@@ -1,0 +1,10 @@
+{
+  "name": "BOILERPLATE",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "BOILERPLATE is a test project for gitboilerplate",
+  "dependencies": {
+    "BOILERPLATE.lib": "^2.0.0"
+  }
+}
