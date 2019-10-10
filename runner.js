@@ -1,13 +1,17 @@
 "use strict"
-const fs = require("fs");
+const fs = require("fs-extra");
 const os = require("os");
 const path = require("path");
+const rmrf = require("rmfr");
 
 const helpers = require("./helpers");
 const fetcher = require("./fetcher");
 const processor = require("./fileprocessor");
 
-module.exports = async function run(args) {
+module.exports = async function runner(args) {
+
+    const src = args.boilerplate;
+    const dest = args.target;
 
     const pwd = process.cwd();
 
@@ -34,12 +38,20 @@ module.exports = async function run(args) {
 
         await processor(options);
 
+        // apply to project
+        await fs.copy(
+            workdir, 
+            options.projectpath, {
+                overwrite: true
+            }
+        )
+
+        console.log("remove workdir: " + workdir)
+        await rmrf(workdir)
+
     } catch (e) {
         console.log(e);
     }
 
     process.chdir(pwd);
 }
-
-run()
-    .then(()=>console.log("end."));
