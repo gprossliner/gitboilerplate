@@ -1,53 +1,22 @@
 #!/usr/bin/env node
 'use strict';
- 
-const ArgumentParser = require('argparse').ArgumentParser
-const fs = require('fs')
-const validator = require('./validator')
 
-// read package.json metadata
-const packageinfo = JSON.parse(fs.readFileSync("package.json"));
+const argsparser = require("./argsparser")
+const validator = require("./validator")
+const runner = require("./runner")
 
-var parser = new ArgumentParser({
-  version: packageinfo.version,
-  addHelp:true,
-  description: packageinfo.description
-});
+async function main(){
 
-parser.addArgument(
-  [ "boilerplate" ],
-  {
-    help: "the URL of the Boilerplate-Repository",
-    required: false
-  }
-);
+    const args = argsparser(process.argv)
+    await validator(args, true)
+    await runner(args)
+}
 
-parser.addArgument(
-    [ "target" ],
-    {
-      help: "The path to apply the Repository. Default is current directory",
-      defaultValue: ".",
-      nargs:"?"
-    }
-);
-
-parser.addArgument(
-    [ "-s", "--skip-undo-validation" ],
-    {
-      help: `If set, ${parser.prog} doesn't validate that undo can be performed`,
-      defaultValue: false,
-      nargs:"0",
-      dest: "skipUndoValidation",
-      action: "storeTrue"
-    }
-);
-
-
-
-// parseArgs exits with ret-code 2, if failed
-// if exists with 0 if -h or -v
-var args = parser.parseArgs();
-
-// console.dir(args);
-
-const validation=validator(args, true);
+main()
+    .catch(reason=>{
+        if(reason instanceof Error)
+            throw reason;
+        else
+            throw new Error(reason);
+    });
+    
